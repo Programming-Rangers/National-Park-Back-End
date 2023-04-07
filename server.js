@@ -130,6 +130,21 @@ class DescriptionImages {
   }
 }
 
+//Read functionality
+app.get('/parks', getParks);
+
+async function getParks(request, response, next){
+  try{
+
+    let allParks = await Park.find({});
+
+    response.status(200).send(allParks);
+
+  } catch(error) {
+    console.error(error);
+    next(error);
+  }
+}
 
 //CREATE functionality
 
@@ -168,11 +183,11 @@ async function updateParks (request, response, next){
 
 app.delete('/parks/:parkID', deleteParks);
 
-async function deleteParks(req,res, next){
+async function deleteParks(request,response, next){
   try {
     let id = request.params.parkID;
 
-    await Park.findByIdAndUpdate(id);
+    await Park.findByIdAndDelete(id);
 
     response.status(200).send('Park deleted successfully!');
 
