@@ -187,7 +187,7 @@ async function deleteParks(request,response, next){
   try {
     let id = request.params.parkID;
 
-    await Park.findByIdAndUpdate(id);
+    await Park.findByIdAndDelete(id);
 
     response.status(200).send('Park deleted successfully!');
 
